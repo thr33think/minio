@@ -16,7 +16,6 @@ services:
     ports:
       - "9000"
     cpu_count: 1
-    user: 0
     mem_reservation: 512m
     mem_limit: 1500000000
     restart: on-failure  
