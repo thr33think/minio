@@ -9,7 +9,7 @@ env:
 services:
 - docker
 before_install:
-- openssl aes-256-cbc -K $encrypted_59c5939bd866_key -iv $encrypted_59c5939bd866_iv -in docker-creds.tar.enc -out docker-creds.tar -d
+- openssl aes-256-cbc -K $encrypted_59c5939bd866_key -iv $encrypted_59c5939bd866_iv -in docker-remote-secrets.tar.enc -out docker-remote-secrets.tar -d
 
 stages:
 - name: build
@@ -26,13 +26,13 @@ jobs:
     env:
       # DOCKER_HOST
     - secure: "wSwxOpMsYbLkhGoZaPYN85G0NXrNRR6ob4fTrmw1BOQzoL/pNPCxw+m4qw5s8nUCRBEamObNunKht9HZrF7Ia0Dop+FRahAaD1VW7rHijExNqewG047nbKYTfBYf5JJ/ylXMrkDKNEIFEihmVh4CczCBmrWT50h7UfM2rO3DGzJNnqvfo3Lry1a7SOuElmOqlymRxuIvfXieDacoXW9GdBhPC5xwlNR0cDI7COmoVPHnhHD/KxuzWumfM4CmXIhwfOVlEaDfb+U6atv6oJehuJpbqJ/33GMt6z16FgHncAZE7SDzHQA/QgoNJriSE9uOT3SO7B+LhacuZKMXDvil7KT033QoogMwyYGDwIk/m2dUbJg0VpqzP++YsM8QaMbMak1xfnJN5aQ6liQGphhJtW7GQ3/1aAzxEB0zZVufnKnr3gjAR2tECzbEcj0veLR803GFccZBaC2JK7EV7F9zF60lyQ5ujOqvSqEMHbctLnaibwjJqCMZ3bZ15mG5tqml4vJ4VyFgDkUh8hVwIv4PT3pOxxY/bRFEiKtJKHoj6x0WCbJ1QwCguzcdKwCKO2bx6+DSoMxg2eRAKSvr3+XJQKz5O2dHrjTMOKmXoTf+VlydWSi9TFgB2u+xw/ybmBFyJ0Tl2sTfQWMlyKpZgbKISx0b/QQ9t2fJHP3BkuDsdto="
-    - DOCKER_CERT_PATH="./docker-creds/docker-remote-secrets/"
+    - DOCKER_CERT_PATH="./docker-remote-secrets"
     - DOCKER_TLS_VERIFY="True"
     # MINIO ACCESS KEY
     - secure: "GTTHzuKwYonKN1qb8c2WdIjUI8AVwlmM0HPLqbFd/7ZFcvVGw5koCa6/sqvaCveEV6Rycw0DcOT3sc0Cfsy4xAMjaLdDB80oL+r20CuN6uAAvpFLaUbsQ+hN083ISg9tzY8j3BPiFwGUivn542A8I0wQwScxT6+cXWi2MIxCz7waww82ARXgDwAJONbUZb9SDpkTAHQ5zsgk281vj2UVlOxpxBfMNv4g9TE+tk6RlqXzCsqDvJxJ4D8Szo1anpOf8maJj1KOTuPpKLQYo3uZYSzcDhEGnZUAx13IO+21Yqf4PVS+s+/B/lxcul0KzrdPhTN/mkJD2BT7IjN/ZTcqE3zEVbMMuFm8FpExnbt7R7dJtK2xmRvQtSlifAK2K2GVhEAo1F2A4F82YJaYUkRfXUg5iz3SNqifU6ORE7s5jjhwumLIxkalY5Ci72ojOLTlV6S5FW7mvAKX9WXDje+KMnwP5SnHzYpLyFL5ijzIkcIJjCqwc6BRcYJUKXj/74luN06S1xk0QfDX6jwa3XxhDUwgS6c0sRqGw/uxcxaEZ9N67xCSjYcqrlJaW00XQqHrLnnBhAPGesuB3CLWpPolXyPpCWfqP0x2KqTTUlaF7X2kNwESJdEGM3J8bVlmi2vwLxc73pX5ukhRxpUdpJZxWpvLV9DqlbVTI2nSYOAmW18="
     # MINIO SECRET KEY
     - secure: "r/wLHEUH1I7PG6E+tfnwyOxwPqro6tyH25su2020VvsnWFmjXw22MGVdTZFyp7cJrBPFf5DNrNGbtLvqnEwJvE4A+ytpeb2PufrSNmvLtZp4up41y1lmDZHHkHFeQVn3YgHzr6lghfUcUJWXpVxevL3fKR7k54Z1Vo0NtqCWvT1Np8Fuae2yeAv/ANP4p76ZUDdjjo9NqGZkK0olUqVE+V21Ok8Wk7OQWaDtv8tZgrZJJ32A05lXWYo6LDqG64+G2ko0D9roaG7VVfgmSKI/aiLOIyv5XGC2cldLgbtKpHg79PBOTUTUHj5dCZWuZ7zWr4oB2mZIhHylgwSu1mnvnY+vY5chOvoZtk6j768hI+2njg8tme4U7LJcQ+NgkE5V1S66IiE3wc+PKOpY34AUdJZ3IAuiJJQPsCVchKnpDYvMFErenb+nvHuLIb3rJlM3L/VgYi8f/ROPsi1oN/uL0Wp9omozH3u/XLOoquRgpgeUuKXIzoHpVAG2xOlVyC07l2WLj0cxfPWTmV7k5FZ+uaGdj5rfHeUNUsLycELo3M3/lIgVzo6wejcx2eAFzMBMARhyaouIkgoS/DAB3Lfwp/C/CAHu1zDXN96l6KieL9ZZ9X3I431p4n2MUCayS07Mb8MKrhkW5K00ChBCMOOowKviJt6OQpNiDahjrkNXVe4="
     script:
-      - tar xvf docker-creds.tar # extracts the folder: docker-creds/docker-remote-secrets
+      - tar xvf docker-remote-secrets.tar # extracts the folder: docker-creds/docker-remote-secrets
       - docker-compose up -d
     if: branch = master
