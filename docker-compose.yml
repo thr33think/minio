@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   minio:
-    image: minio/minio:${TRAVIS_COMMIT}
+    image: threethink/minio:${TRAVIS_COMMIT}
     scale: 1
     volumes:
       - /data/minio/data/:/data
