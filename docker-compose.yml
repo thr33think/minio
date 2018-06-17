@@ -1,0 +1,27 @@
+version: '2.3'
+services:
+  minio:
+    image: minio/minio:${TRAVIS_COMMIT}
+    scale: 1
+    volumes:
+      - /data/minio/data/:/data
+    environment:
+      MINIO_ACCESS_KEY: ${ACCESS_KEY}
+      MINIO_SECRET_KEY: ${SECRET_KEY}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=minio"
+      - "traefik.port=9000"
+      - "traefik.frontend.rule=Host:s3.turds.dog"
+    ports:
+      - "9000"
+    cpu_count: 1
+    user: 0
+    mem_reservation: 512m
+    mem_limit: 1500000000
+    restart: on-failure  
+    networks:
+      - production
+networks:
+  production:
+    external: true
