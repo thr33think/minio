@@ -19,9 +19,8 @@ jobs:
   - stage: build
     script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
-    - docker build --pull --rm -t threethink/minio:${TRAVIS_COMMIT} .
-    - docker push threethink/minio:${TRAVIS_COMMIT}
-    if: branch = master
+    - make build
+    - make push
   - stage: deploy
     env:
       # DOCKER_HOST
@@ -34,5 +33,4 @@ jobs:
     - secure: "r/wLHEUH1I7PG6E+tfnwyOxwPqro6tyH25su2020VvsnWFmjXw22MGVdTZFyp7cJrBPFf5DNrNGbtLvqnEwJvE4A+ytpeb2PufrSNmvLtZp4up41y1lmDZHHkHFeQVn3YgHzr6lghfUcUJWXpVxevL3fKR7k54Z1Vo0NtqCWvT1Np8Fuae2yeAv/ANP4p76ZUDdjjo9NqGZkK0olUqVE+V21Ok8Wk7OQWaDtv8tZgrZJJ32A05lXWYo6LDqG64+G2ko0D9roaG7VVfgmSKI/aiLOIyv5XGC2cldLgbtKpHg79PBOTUTUHj5dCZWuZ7zWr4oB2mZIhHylgwSu1mnvnY+vY5chOvoZtk6j768hI+2njg8tme4U7LJcQ+NgkE5V1S66IiE3wc+PKOpY34AUdJZ3IAuiJJQPsCVchKnpDYvMFErenb+nvHuLIb3rJlM3L/VgYi8f/ROPsi1oN/uL0Wp9omozH3u/XLOoquRgpgeUuKXIzoHpVAG2xOlVyC07l2WLj0cxfPWTmV7k5FZ+uaGdj5rfHeUNUsLycELo3M3/lIgVzo6wejcx2eAFzMBMARhyaouIkgoS/DAB3Lfwp/C/CAHu1zDXN96l6KieL9ZZ9X3I431p4n2MUCayS07Mb8MKrhkW5K00ChBCMOOowKviJt6OQpNiDahjrkNXVe4="
     script:
       - tar xvf docker-remote-secrets.tar # extracts the folder: docker-remote-secrets
-      - docker-compose up -d
-    if: branch = master
+      - make deploy
