@@ -4,7 +4,7 @@ services:
     image: threethink/minio:${TRAVIS_COMMIT}
     scale: 1
     volumes:
-      - /data/minio/data/:/data
+      - /home/docker/data/dog-turds/minio:/data
     environment:
       MINIO_ACCESS_KEY: ${ACCESS_KEY}
       MINIO_SECRET_KEY: ${SECRET_KEY}
@@ -21,7 +21,7 @@ services:
     mem_limit: 1500000000
     restart: on-failure  
     networks:
-      - production
+      - dogturds
 networks:
-  production:
+  dogturds:
     external: true
