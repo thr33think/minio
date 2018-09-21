@@ -1,5 +1,6 @@
-  sudo: required
+sudo: required
 dist: trusty
+language: generic
 env:
   global:
   # DOCKER_USER
