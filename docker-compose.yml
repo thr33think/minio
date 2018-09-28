@@ -21,7 +21,10 @@ services:
     mem_limit: 1500000000
     restart: on-failure  
     networks:
-      - dogturds
+    - dogturds
+    - loadbalancer
 networks:
   dogturds:
+    external: true
+  loadbalancer:
     external: true
