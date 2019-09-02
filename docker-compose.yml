@@ -13,13 +13,14 @@ services:
       - "traefik.enable=true"
       - "traefik.backend=minio"
       - "traefik.port=9000"
-      - "traefik.frontend.rule=Host:s3.turds.dog"
+      - "traefik.frontend.rule=Host:s3.threethink.io"
+      - "traefik.docker.network=loadbalancer"
     ports:
       - "9000"
     cpu_count: 1
     mem_reservation: 512m
     mem_limit: 1500000000
-    restart: on-failure  
+    restart: always 
     networks:
     - dogturds
     - loadbalancer
