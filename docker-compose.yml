@@ -1,7 +1,8 @@
 version: '2.3'
 services:
   minio:
-    image: threethink/minio:${TRAVIS_COMMIT}
+    build: .
+    image: minio/minio:RELEASE.2019-08-29T00-25-01Z
     scale: 1
     volumes:
       - /home/docker/data/dog-turds/minio:/data
